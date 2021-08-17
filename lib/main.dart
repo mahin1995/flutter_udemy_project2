@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           Card(
             child: Container(width: 100,height: 200,child: Text("Chart")),
           elevation: 5, 
-          ),
+          ),//card
           
            Card(
             child: Text("List of chart"),
