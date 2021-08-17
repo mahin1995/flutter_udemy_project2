@@ -11,6 +11,10 @@ class MyApp extends StatelessWidget {
         id: 't1', title: "New showes", amount: 69.3, date: DateTime.now()),
     Transaction(
         id: 't2', title: "Growsery", amount: 999.3, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: "Growsery", amount: 999.3, date: DateTime.now()),
+
+
   ];
   // const MyApp({Key? key}) : super(key: key);
 
@@ -42,22 +46,43 @@ class MyApp extends StatelessWidget {
                   child: Row(
                   children: <Widget>[
                     Container(
-                      child: Text(tx.amount.toString()),
+                      child: Text(
+                        tx.amount.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.purple),
+                      ),
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                          padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black)),
+                          border: Border.all(color: Colors.purple, width: 2)),
                     ),
                     Column(
                       children: <Widget>[
-                        Text(tx.title),
-                        Text(tx.date.toString()),
+                        Text(
+                          tx.title,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          tx.date.toString(),
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
                       ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     )
                   ],
                 )
+                
                 );
               }).toList(),
+              
             ),
           
           ],
