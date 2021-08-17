@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'transaction.dart';
+import 'package:intl/intl.dart';
+import 'model/transaction.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,11 +14,12 @@ class MyApp extends StatelessWidget {
         id: 't2', title: "Growsery", amount: 999.3, date: DateTime.now()),
     Transaction(
         id: 't2', title: "Growsery", amount: 999.3, date: DateTime.now()),
-
-
   ];
   // const MyApp({Key? key}) : super(key: key);
-
+  // String? titleInput;
+  // String? amountInput;
+  final titleController=TextEditingController();
+  final amountController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
           title: Text('Flutter App'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -34,20 +36,50 @@ class MyApp extends StatelessWidget {
               child: Card(
                 child: Container(
                     width: double.infinity,
-                    height: 200,
                     color: Colors.blue,
                     child: Text("Chart")),
                 elevation: 5,
               ),
             ), //card
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                      controller: titleController,
+                      // onChanged: (val) => titleInput = val,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                      controller: amountController,
+                      // onChanged: (val) => amountInput = val,
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        // print(titleInput);
+                        // print(amountInput);
+                        print(titleController.text);
+                        print(amountController.text);
+                      },
+                      child: Text("Add Transaction"),
+                      color: Colors.purple,
+                    )
+                  ],
+                ),
+              ),
+            ),
             Column(
               children: transaction.map((tx) {
                 return Card(
-                  child: Row(
+                    child: Row(
                   children: <Widget>[
                     Container(
                       child: Text(
-                        tx.amount.toString(),
+                        '\$ ${tx.amount}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -55,7 +87,7 @@ class MyApp extends StatelessWidget {
                       ),
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                          padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.purple, width: 2)),
                     ),
@@ -69,27 +101,21 @@ class MyApp extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          tx.date.toString(),
+                          DateFormat.yMMMd().format(tx.date),
                           style: TextStyle(
                             color: Colors.grey,
                           ),
                         ),
                       ],
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                     )
                   ],
-                )
-                
-                );
+                ));
               }).toList(),
-              
             ),
-          
           ],
         ),
       ),
     );
   }
-
-
 }
