@@ -10,47 +10,52 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-              children: transaction.map((tx) {
-                return Card(
-                    child: Row(
-                  children: <Widget>[
-                    Container(
-                      child: Text(
-                        '\$ ${tx.amount}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.purple),
-                      ),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.purple, width: 2)),
-                    ),
-                    Column(
+    return Container(
+      height: 300,
+      child: SingleChildScrollView(
+        child: Column(
+                  children: transaction.map((tx) {
+                    return Card(
+                        child: Row(
                       children: <Widget>[
-                        Text(
-                          tx.title,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                        Container(
+                          child: Text(
+                            '\$ ${tx.amount}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.purple),
                           ),
+                          margin:
+                              EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.purple, width: 2)),
                         ),
-                        Text(
-                          DateFormat.yMMMd().format(tx.date),
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              tx.title,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              DateFormat.yMMMd().format(tx.date),
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                        )
                       ],
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                    )
-                  ],
-                ));
-              }).toList(),
-            );
+                    ));
+                  }).toList(),
+                ),
+      ),
+    );
   }
 }
 

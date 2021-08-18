@@ -20,22 +20,24 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Flutter App'),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              child: Card(
-                child: Container(
-                    width: double.infinity,
-                    color: Colors.blue,
-                    child: Text("Chart")),
-                elevation: 5,
-              ),
-            ), //card
-          UserTransactionState()
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                child: Card(
+                  child: Container(
+                      width: double.infinity,
+                      color: Colors.blue,
+                      child: Text("Chart")),
+                  elevation: 5,
+                ),
+              ), //card
+            UserTransactionState()
+            ],
+          ),
         ),
       ),
     );
