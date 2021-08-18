@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './widget/user_transaction.dart';
 
 
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
                 elevation: 5,
               ),
             ), //card
-   
+          UserTransactionState()
           ],
         ),
       ),
