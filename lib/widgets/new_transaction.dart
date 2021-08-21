@@ -15,17 +15,23 @@ class _NewTransactionState extends State<NewTransaction> {
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
 
+  
+
   void _submitData() {
+    if(_amountController.text.isEmpty){
+      return;
+    }
     final enteredTitle = _titleController.text;
     final enteredAmount = double.parse(_amountController.text);
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null )  {
       return;
     }
 
     widget.addTx(
       enteredTitle,
       enteredAmount,
+      _selectedDate
     );
 
     Navigator.of(context).pop();
@@ -41,9 +47,14 @@ class _NewTransactionState extends State<NewTransaction> {
       if (pickDate == null) {
         return;
       }
+      setState(() {
       _selectedDate = pickDate;
+      print(_selectedDate);
+
+      });
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +85,13 @@ class _NewTransactionState extends State<NewTransaction> {
               child: Row(
                 children: <Widget>[
                   // ignore: unnecessary_null_comparison
-                  // Text(
-
-                  //   _selectedDate == null
-                  //       ? 'No date Selected!'
-                  //       : DateFormat.yMd(_selectedDate),
-                  // ),
+                  Expanded(
+                    child: Text(
+                      _selectedDate == null
+                          ? 'No date Selected!'
+                          : 'Picked date: ${DateFormat.yMd().format(_selectedDate!)}',
+                    ),
+                  ),
                   FlatButton(
                     onPressed: _presentDatepicker,
                     child: Text(
