@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.purple,
           accentColor: Colors.amber,
+          errorColor: Colors.red,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
@@ -94,6 +95,11 @@ List<Transaction>? get _recentTransactions {
       },
     );
   }
+  void _deleteTransaction(String id){
+    setState(() {
+      _userTransactions.removeWhere((tx) =>tx.id==id );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +121,7 @@ List<Transaction>? get _recentTransactions {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions!),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions,_deleteTransaction),
           ],
         ),
       ),
