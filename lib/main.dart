@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 
-
 import './widgets/chart.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
@@ -54,7 +53,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _userTransactions = [
     // Transaction(
     //   id: 't1',
@@ -70,6 +69,24 @@ class _MyHomePageState extends State<MyHomePage> {
     // ),
   ];
   bool _showChart = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addObserver(this);
+
+    super.initState();
+  }
+
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   List<Transaction>? get _recentTransactions {
     return _userTransactions.where((tx) {
@@ -99,7 +116,6 @@ class _MyHomePageState extends State<MyHomePage> {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
-        
         return GestureDetector(
           onTap: () {},
           child: NewTransaction(_addNewTransaction),
@@ -170,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     0.3,
               ),
             if (!_isLandscape) txListWidget,
-            if (_isLandscape) _showChart ? chartList : txListWidget 
+            if (_isLandscape) _showChart ? chartList : txListWidget
           ],
         ),
       ),

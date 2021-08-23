@@ -4,35 +4,59 @@ import 'package:intl/intl.dart';
 class NewTransaction extends StatefulWidget {
   final Function addTx;
 
-  NewTransaction(this.addTx);
+  NewTransaction(this.addTx) {
+    print("constructor newtransaction widget");
+  }
 
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _NewTransactionState createState() {
+    print('create newtransaction State');
+    return _NewTransactionState();
+  }
 }
 
 class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
+  _NewTransactionState() {
+    print("constuctor _newtransaction State");
+  }
 
-  
+  @override
+  void initState() {
+    print('initState()');
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant NewTransaction oldWidget) {
+    // TODO: implement didUpdateWidget
+    print("print didupdate()");
+    // print(oldWidget);
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    print("dispose()");
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   void _submitData() {
-    if(_amountController.text.isEmpty){
+    if (_amountController.text.isEmpty) {
       return;
     }
     final enteredTitle = _titleController.text;
     final enteredAmount = double.parse(_amountController.text);
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null )  {
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
 
-    widget.addTx(
-      enteredTitle,
-      enteredAmount,
-      _selectedDate
-    );
+    widget.addTx(enteredTitle, enteredAmount, _selectedDate);
 
     Navigator.of(context).pop();
   }
@@ -48,13 +72,11 @@ class _NewTransactionState extends State<NewTransaction> {
         return;
       }
       setState(() {
-      _selectedDate = pickDate;
-      print(_selectedDate);
-
+        _selectedDate = pickDate;
+        print(_selectedDate);
       });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
